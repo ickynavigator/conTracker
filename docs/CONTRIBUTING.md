@@ -14,3 +14,5 @@ For working on this repository, you will need to have a GitHub account.
 ### Issues
 
 ### Pull requests
+
+- Make your PRs to the dev branch.
