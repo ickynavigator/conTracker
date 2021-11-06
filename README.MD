@@ -2,6 +2,8 @@
 
 A software for storing criminal information
 
+[Contribution Guideline](docs/CONTRIBUTING.md)
+
 # Contributors
 
-Obi Fortune <gabrielobi.of@gmail.com>
+[Contributors List](docs/CONTRIBUTORS.md)
