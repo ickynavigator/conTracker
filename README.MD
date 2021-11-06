@@ -1,6 +1,9 @@
 # Contracker
 
-A software for storing criminal info
+A software for storing criminal information
+
+
+
 
 # Contributors
 
