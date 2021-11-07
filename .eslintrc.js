@@ -9,6 +9,7 @@ module.exports = {
     "airbnb",
     "plugin:prettier/recommended"
   ],
+  parser: "babel-eslint",
   parserOptions: {
     ecmaFeatures: {
       jsx: true
@@ -17,5 +18,17 @@ module.exports = {
     sourceType: "module"
   },
   plugins: ["react"],
-  rules: {}
+  rules: {
+    "react/jsx-props-no-spreading": "off",
+    "react/jsx-filename-extension": [
+      1,
+      { extensions: [".js", ".jsx", ".ts", ".tsx"] }
+    ]
+  },
+  overrides: [
+    {
+      files: ["./packages/con-tracker-client"],
+      extends: ["next/core-web-vitals"]
+    }
+  ]
 }
