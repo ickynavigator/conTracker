@@ -4,9 +4,9 @@ import dotenv from "dotenv";
 import "colors";
 import morgan from "morgan";
 
-import { notFound, errorHandler } from "./middleware/errorMiddleware";
-import { connectMONGO } from "./db/conn";
-import allRoutes from "./routes/index";
+import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
+import { connectMONGO } from "./db/conn.js";
+import allRoutes from "./routes/index.js";
 
 dotenv.config();
 
