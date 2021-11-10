@@ -20,6 +20,11 @@ module.exports = {
       1,
       { extensions: [".js", ".jsx", ".ts", ".tsx"] },
     ],
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      { js: "0", jsx: "0", ts: "0", tsx: "0" },
+    ],
   },
   overrides: [
     {
@@ -31,4 +36,4 @@ module.exports = {
       rules: { "no-console": "off" },
     },
   ],
-}
+};
