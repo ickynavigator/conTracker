@@ -1,0 +1,58 @@
+# Use the latest 2.1 version of CircleCI pipeline process engine.
+# See: https://circleci.com/docs/2.0/configuration-reference
+version: 2.1
+
+orbs:
+  node: circleci/node@4.7
+
+jobs:
+  root-build-and-test:
+    docker:
+      - image: cimg/node:16.10
+    steps:
+      - checkout
+      - node/install-packages:
+          pkg-manager: yarn
+      - run:
+          name: Run all tests
+          command: yarn test
+
+  api-build-and-test:
+    docker:
+      - image: cimg/node:16.10
+    steps:
+      - checkout
+      - node/install-packages:
+          pkg-manager: yarn
+      - run: | 
+          - cd packages/con-tracker-api
+          - npm test
+  client-build-and-test:
+    docker:
+      - image: cimg/node:16.10
+    steps:
+      - checkout
+      - node/install-packages:
+          pkg-manager: yarn
+      - run: | 
+          - cd packages/con-tracker-client
+          - npm test
+  admin-build-and-test:
+    docker:
+      - image: cimg/node:16.10
+    steps:
+      - checkout
+      - node/install-packages:
+          pkg-manager: yarn
+      - run: | 
+          - cd packages/con-tracker-client
+          - npm test
+
+workflows:
+  sample:
+    jobs:
+      # - root-build-and-test # runs all test in the root as lerna
+      - api-build-and-test
+      # - client-build-and-test
+      # - admin-build-and-test
+      # - node/test
