@@ -17,26 +17,6 @@ jobs:
           name: Run all tests
           command: yarn test
 
-  api-build-and-test:
-    docker:
-      - image: cimg/node:16.10
-    steps:
-      - checkout
-      - node/install-packages:
-          pkg-manager: yarn
-      - run: | 
-          - cd packages/con-tracker-api
-          - npm test
-  client-build-and-test:
-    docker:
-      - image: cimg/node:16.10
-    steps:
-      - checkout
-      - node/install-packages:
-          pkg-manager: yarn
-      - run: | 
-          - cd packages/con-tracker-client
-          - npm test
   admin-build-and-test:
     docker:
       - image: cimg/node:16.10
@@ -45,8 +25,28 @@ jobs:
       - node/install-packages:
           pkg-manager: yarn
       - run: | 
-          - cd packages/con-tracker-client
-          - npm test
+          cd packages/con-tracker-client
+          npm test
+  api-build-and-test:
+    docker:
+      - image: cimg/node:16.10
+    steps:
+      - checkout
+      - node/install-packages:
+          pkg-manager: yarn
+      - run: | 
+          cd packages/con-tracker-api
+          npm test
+  client-build-and-test:
+    docker:
+      - image: cimg/node:16.10
+    steps:
+      - checkout
+      - node/install-packages:
+          pkg-manager: yarn
+      - run: |
+          cd packages/con-tracker-client
+          npm test
 
 workflows:
   sample:
