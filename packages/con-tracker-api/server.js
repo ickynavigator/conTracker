@@ -11,6 +11,7 @@ import allRoutes from "./routes/index.js";
 dotenv.config();
 
 const PORT = process.env.PORT || 5000;
+const VERSION_NUMBER = "1.0.0";
 connectMONGO();
 const app = express();
 
@@ -19,7 +20,7 @@ if (process.env.NODE_ENV === "development") {
 }
 
 app.use(express.json());
-app.use("/api", allRoutes);
+app.use(`${VERSION_NUMBER}/api`, allRoutes);
 
 app.get("/", (req, res) => {
   res.send("API is running....");
