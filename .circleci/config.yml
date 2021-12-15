@@ -65,6 +65,6 @@ workflows:
             - api-build-and-test
           filters:
             branches:
-              only: sequential-branch-filter
+              only: main
           post-steps:
             - jira/notify
