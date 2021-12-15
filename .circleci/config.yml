@@ -55,7 +55,7 @@ workflows:
     jobs:
       # - root-build-and-test # runs all test in the root as lerna
       - api-build-and-test
-      # - client-build-and-test
+      - client-build-and-test
       # - admin-build-and-test
   Heroku_deploy:
     jobs:
