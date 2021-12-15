@@ -32,7 +32,7 @@ app.use(errorHandler);
 app.listen(
   PORT,
   console.log(
-    `\nServer running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow
-      .bold,
+    `\nServer running in ${process.env.NODE_ENV} mode on port ${PORT} -> http://localhost:${PORT}/${VERSION_NUMBER}/api`
+      .yellow.bold,
   ),
 );

@@ -5,6 +5,7 @@ version: 2.1
 orbs:
   node: circleci/node@4.7
   jira: circleci/jira@1.3.1
+  heroku: circleci/heroku@0.0.10
 
 jobs:
   root-build-and-test:
@@ -55,6 +56,13 @@ workflows:
       # - root-build-and-test # runs all test in the root as lerna
       - api-build-and-test
       - client-build-and-test
-      - admin-build-and-test
-      # - node/test
-  Deploy:
+      # - admin-build-and-test
+  Heroku_deploy:
+    jobs:
+      - api-build-and-test
+      - heroku/deploy-via-git:
+          requires:
+            - api-build-and-test
+          filters:
+            branches:
+              only: sequential-branch-filter
