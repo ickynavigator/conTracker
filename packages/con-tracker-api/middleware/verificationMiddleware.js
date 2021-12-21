@@ -28,3 +28,40 @@ export const CriminalVerification = checkSchema({
     isString: { errorMessage: "Invalid Name" },
   },
 });
+
+export const CriminalInfoVerification = checkSchema({
+  nameFirst: {
+    notEmpty: { errorMessage: "First Name is required" },
+    isString: { errorMessage: "Invalid Name" },
+  },
+  nameLast: {
+    isString: { errorMessage: "Invalid Name" },
+  },
+  nameOthers: {
+    isString: { errorMessage: "Invalid Name" },
+  },
+  description: {
+    notEmpty: { errorMessage: "Description is required" },
+    isString: { errorMessage: "Invalid Description" },
+  },
+  dob: {
+    isString: { errorMessage: "Invalid Date of Birth" },
+  },
+  sex: {
+    isIn: {
+      options: ["M", "F"],
+      errorMessage:
+        "Invalid Options. Valid Options are 'M', 'F', or leave empty for 'UNSPECIFIED'",
+    },
+  },
+  race: {
+    isString: { errorMessage: "Invalid Race" },
+  },
+});
+
+export const checkforIDinParams = checkSchema({
+  id: {
+    in: ["params"],
+    notEmpty: { errorMessage: "ID is required" },
+  },
+});
