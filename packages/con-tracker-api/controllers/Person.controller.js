@@ -128,8 +128,8 @@ export const createPerson = asyncHandler(async (req, res) => {
       description: description.trim(),
       dob: dob ? new Date(dob).toUTCString() : "",
       residencePermitValidation,
-      sex: sex || "other",
-      race: race.trim() || "",
+      sex: sex || "UNSPECIFIED",
+      race: race.trim().toLowerCase() || "",
     });
 
     const createdPerson = await person.save();
