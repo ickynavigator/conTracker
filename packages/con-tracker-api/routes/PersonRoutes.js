@@ -1,19 +1,18 @@
 import express from "express";
-
 import {
-  getPersons,
-  getPersonById,
-  deletePerson,
   createPerson,
-  updatePerson,
+  deletePerson,
+  getPersonById,
+  getPersons,
   getTopPersons,
-} from "../controllers/PersonController.js";
+  updatePerson,
+} from "../controllers/Person.controller.js";
 import { admin, protect } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
 router.route("/").get(getPersons).post(protect, admin, createPerson);
-router.route("/top").get(getTopPersons);
+router.route("/wanted").get(getTopPersons);
 router
   .route("/:id")
   .get(getPersonById)
