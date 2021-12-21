@@ -9,15 +9,12 @@
     "test": "echo \"Error: no test specified\" && exit 0"
   },
   "dependencies": {
-    "next": "12.0.5",
+    "next": "12.0.7",
     "react": "17.0.2",
     "react-dom": "17.0.2"
   },
   "devDependencies": {
-    "@types/node": "16.11.6",
-    "@types/react": "17.0.34",
-    "eslint": "7",
-    "eslint-config-next": "12.0.3",
-    "typescript": "^4.4.4"
+    "eslint": "8.5.0",
+    "eslint-config-next": "12.0.7"
   }
 }
