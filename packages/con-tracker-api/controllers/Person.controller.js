@@ -13,56 +13,44 @@ export const getPersons = asyncHandler(async (req, res) => {
   const page = Number(req.query.pageNumber) || 1;
   const myFilter = req.query.filter;
   const param = req.query.param || "";
-  const regOptions = "gim";
-  let keyword = {};
+  const regOpt = "gim";
+  let keyword = [{}];
 
   if (req.query.keyword) {
+    keyword = [
+      { nameFirst: { $regex: req.query.keyword, $options: regOpt } },
+      { nameLast: { $regex: req.query.keyword, $options: regOpt } },
+    ];
+
     const specificQuery = {};
-    if (req.query.param)
-      specificQuery[param] = {
-        $regex: req.query.keyword,
-        $options: regOptions,
-      };
-
-    keyword = {
-      nameFirst: { $regex: req.query.keyword, $options: regOptions },
-      nameLast: { $regex: req.query.keyword, $options: regOptions },
-      ...specificQuery,
-    };
-
-    // {
-    //   $and: [
-    //     { $or: [{ title: regex }, { description: regex }] },
-    //     { category: value.category },
-    //     { city: value.city },
-    //   ];
-    // }
+    if (req.query.param) {
+      specificQuery[param] = { $regex: req.query.keyword, $options: regOpt };
+      keyword.push({ ...specificQuery });
+    }
   }
-
-  console.log(keyword);
 
   let persons;
   switch (myFilter) {
     case "newest":
-      persons = await Person.find({ ...keyword })
+      persons = await Person.find({ $or: [...keyword] })
         .sort([["_id", -1]])
         .limit(pageSize)
         .skip(pageSize * (page - 1));
       break;
     case "oldest":
-      persons = await Person.find({ ...keyword })
+      persons = await Person.find({ $or: [...keyword] })
         .sort([["_id", 1]])
         .limit(pageSize)
         .skip(pageSize * (page - 1));
       break;
     default:
-      persons = await Person.find({ ...keyword })
+      persons = await Person.find({ $or: [...keyword] })
         .limit(pageSize)
         .skip(pageSize * (page - 1));
       break;
   }
 
-  const count = await Person.countDocuments({ ...keyword });
+  const count = await Person.countDocuments({ $or: [...keyword] });
   res.json({ persons, page, pages: Math.ceil(count / pageSize) });
 });
 
