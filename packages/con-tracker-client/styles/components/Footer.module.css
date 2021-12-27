@@ -1,5 +1,6 @@
 .contactWrapper {
   background: rgba(0, 106, 203, 0.69);
+  overflow: hidden;
 }
 
 .copyrightWrapper {
