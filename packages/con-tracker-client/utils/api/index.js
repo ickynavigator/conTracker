@@ -3,7 +3,7 @@ import axios from "axios";
 export const ApiUrl =
   process.env.NODE_ENV === "production"
     ? "https://contracker316.herokuapp.com"
-    : "http://localhost:3333";
+    : "http://localhost:5000";
 export const BASEURL = `${ApiUrl}/v1/api`;
 
 export const getWantedCriminals = async (pageNum = 1, pageSize = 10) => {
@@ -15,6 +15,11 @@ export const getWantedCriminals = async (pageNum = 1, pageSize = 10) => {
 
 export const submitCrime = async data => {
   const res = axios.post(`${BASEURL}/report/crime`, data);
+  return (await res).data;
+};
+
+export const submitContactForm = async data => {
+  const res = axios.post(`${BASEURL}/report/contact`, data);
   return (await res).data;
 };
 

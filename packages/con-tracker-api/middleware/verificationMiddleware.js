@@ -65,3 +65,18 @@ export const checkforIDinParams = checkSchema({
     notEmpty: { errorMessage: "ID is required" },
   },
 });
+
+export const contactUsVerification = checkSchema({
+  name: {
+    notEmpty: { errorMessage: "Name is required" },
+    isString: { errorMessage: "Invalid name" },
+  },
+  email: {
+    notEmpty: { errorMessage: "Email is required" }, 
+    isEmail: { errorMessage: "Invalid email" },
+  },
+  message: {
+    notEmpty: { errorMessage: "Message is required" },
+    isString: { errorMessage: "Invalid message" },
+  },
+})
