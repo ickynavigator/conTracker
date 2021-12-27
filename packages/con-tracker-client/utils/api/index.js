@@ -13,4 +13,9 @@ export const getWantedCriminals = async (pageNum = 1, pageSize = 10) => {
   return (await res).data;
 };
 
+export const submitCrime = async data => {
+  const res = axios.post(`${BASEURL}/report/crime`, data);
+  return (await res).data;
+};
+
 export default {};
