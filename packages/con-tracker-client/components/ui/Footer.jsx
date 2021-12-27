@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Col, Row, Form, Container, Button } from "react-bootstrap";
 import { FiMail, FiPhone } from "react-icons/fi";
 import styles from "../../styles/components/Footer.module.css";
+import { submitContactForm } from "../../utils/api";
 
 const Footer = () => {
   const phone = "+1 (844) 567-8989";
@@ -12,7 +13,7 @@ const Footer = () => {
   const [message, setMessage] = useState("");
 
   const [validated, setValidated] = useState(false);
-  const handleSubmit = event => {
+  const handleSubmit = async event => {
     event.preventDefault();
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
@@ -20,6 +21,9 @@ const Footer = () => {
       return;
     }
     setValidated(true);
+
+    const data = await submitContactForm({ name, email, message });
+    console.log(data);
   };
 
   return (
