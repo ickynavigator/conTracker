@@ -1,0 +1,13 @@
+.contactWrapper {
+  background: rgba(0, 106, 203, 0.69);
+}
+
+.copyrightWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 1.5rem 0;
+  color: white;
+  background: rgba(0, 0, 0, 0.69);
+}
