@@ -1,4 +1,5 @@
 import express from "express";
+import { submitContactForm } from "../controllers/Contact.controller.js";
 
 import {
   submitMissingPerson,
@@ -9,6 +10,7 @@ import {
   BaseFormVerification,
   pictureVerification,
   CriminalVerification,
+  contactUsVerification
 } from "../middleware/verificationMiddleware.js";
 // import { admin, protect } from "../middleware/authMiddleware.js";
 
@@ -21,5 +23,6 @@ router.route("/complaint").post(BaseFormVerification, submitComplaint);
 router
   .route("/crime")
   .post(BaseFormVerification, CriminalVerification, submitCrime);
+  router.route("/contact").post( contactUsVerification ,submitContactForm);
 
 export default router;
