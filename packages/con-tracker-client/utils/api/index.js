@@ -13,11 +13,14 @@ export const getWantedCriminals = async (pageNum = 1, pageSize = 10) => {
   return (await res).data;
 };
 
-export const submitContactForm = async (data)=>{
-  const res = axios.post(
-    `${BASEURL}/report/contact`, data
-  );
+export const submitCrime = async data => {
+  const res = axios.post(`${BASEURL}/report/crime`, data);
   return (await res).data;
-}
+};
+
+export const submitContactForm = async data => {
+  const res = axios.post(`${BASEURL}/report/contact`, data);
+  return (await res).data;
+};
 
 export default {};
