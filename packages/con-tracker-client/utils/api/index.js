@@ -25,6 +25,24 @@ export const getAllCriminalById = async ID => {
   return (await res).data;
 };
 
+export const getAllMissing = async (
+  pageNum = 1,
+  pageSize = 10,
+  search = "",
+) => {
+  const query = search ? `keyword=${search}` : "";
+  const page = pageNum ? `pageNumber=${pageNum}` : "";
+  const size = pageSize ? `pageSize=${pageSize}` : "";
+
+  const res = axios.get(`${BASEURL}/person/missing?${query}&${page}&${size}`);
+  return (await res).data;
+};
+
+export const getMissingPersonById = async ID => {
+  const res = axios.get(`${BASEURL}/person/missing/${ID}`);
+  return (await res).data;
+};
+
 export const getWantedCriminals = async (pageNum = 1, pageSize = 10) => {
   const res = axios.get(
     `${BASEURL}/person/wanted?pageNumber=${pageNum}&pageSize=${pageSize}`,
