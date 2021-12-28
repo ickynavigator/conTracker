@@ -20,6 +20,11 @@ export const getAllCriminals = async (
   return (await res).data;
 };
 
+export const getAllCriminalById = async ID => {
+  const res = axios.get(`${BASEURL}/person/${ID}`);
+  return (await res).data;
+};
+
 export const getWantedCriminals = async (pageNum = 1, pageSize = 10) => {
   const res = axios.get(
     `${BASEURL}/person/wanted?pageNumber=${pageNum}&pageSize=${pageSize}`,
