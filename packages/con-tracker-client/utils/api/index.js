@@ -1,9 +1,10 @@
 import axios from "axios";
 
 export const ApiUrl =
-  process.env.NODE_ENV === "production"
+  process.env.NODE_ENV === "production" &&
+  process.env.NEXT_PUBLIC_API_URL !== ""
     ? "https://contracker316.herokuapp.com"
-    : process.envNEXT_PUBLIC_API_URL;
+    : process.env.NEXT_PUBLIC_API_URL;
 export const BASEURL = `${ApiUrl}/v1/api`;
 
 export const getWantedCriminals = async (pageNum = 1, pageSize = 10) => {
