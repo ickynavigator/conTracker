@@ -10,6 +10,7 @@ export async function getServerSideProps(context) {
   const { id } = context.params;
 
   const data = await getMissingPersonById(id);
+  console.log(data);
 
   if (!data) return { notFound: true };
   return { props: { data } };
