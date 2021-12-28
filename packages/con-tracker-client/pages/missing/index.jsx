@@ -39,7 +39,7 @@ const Person = props => {
       <Card.Img variant="top" src={image || fallbackPic} />
       <Card.Body>
         <Card.Title>{name}</Card.Title>
-        <Link passHref href={`/misssing/${id}`}>
+        <Link passHref href={`/missing/${id}`}>
           <Button variant="primary">View</Button>
         </Link>
       </Card.Body>
@@ -63,7 +63,7 @@ const index = props => {
       <MetaHead title="List of all Missing Persons" />
 
       <div className="title-banner w-full">
-        <h1 className="text-center">ALL MiSSING</h1>
+        <h1 className="text-center">ALL MISSING</h1>
       </div>
       <Container className="my-3">
         <Row>
