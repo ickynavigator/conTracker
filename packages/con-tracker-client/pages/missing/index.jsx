@@ -12,7 +12,7 @@ import {
 } from "react-bootstrap";
 import { FaSearch } from "react-icons/fa";
 import { MetaHead, Paginate } from "../../components/ui";
-import { getAllCriminals } from "../../utils/api";
+import { getAllMissing } from "../../utils/api";
 
 const fallbackPic = "/assets/images/NoPicture.svg";
 
@@ -21,15 +21,15 @@ export async function getServerSideProps(context) {
   const pageNum = context.query.p || 1;
   const search = context.query.k || "";
 
-  const data = await getAllCriminals(pageNum, pageSize, search);
+  const data = await getAllMissing(pageNum, pageSize, search);
 
   if (!data) return { notFound: true };
   return { props: { ...data, search } };
 }
 
 const Person = props => {
-  const { criminal } = props;
-  const { _id: id, nameFirst, nameLast, nameOthers, image } = criminal;
+  const { missing } = props;
+  const { _id: id, nameFirst, nameLast, nameOthers, image } = missing;
 
   const name = `${nameFirst} ${
     nameOthers && `${nameOthers.split("")[0].toUpperCase()}.`
@@ -39,7 +39,7 @@ const Person = props => {
       <Card.Img variant="top" src={image || fallbackPic} />
       <Card.Body>
         <Card.Title>{name}</Card.Title>
-        <Link passHref href={`/criminals/${id}`}>
+        <Link passHref href={`/missing/${id}`}>
           <Button variant="primary">View</Button>
         </Link>
       </Card.Body>
@@ -60,10 +60,10 @@ const index = props => {
 
   return (
     <>
-      <MetaHead title="List of all criminals" />
+      <MetaHead title="List of all Missing Persons" />
 
       <div className="title-banner w-full">
-        <h1 className="text-center">ALL CRIMINALS</h1>
+        <h1 className="text-center">ALL MISSING</h1>
       </div>
       <Container className="my-3">
         <Row>
@@ -93,14 +93,14 @@ const index = props => {
             const { _id: id } = person;
             return (
               <Col key={id} className="p-4 d-flex justify-content-center">
-                <Person criminal={person} />
+                <Person missing={person} />
               </Col>
             );
           })}
         </Row>
       ) : (
         <Alert variant="danger" className="text-center my-3 mx-5">
-          No Criminals found
+          No Missing found
         </Alert>
       )}
       <Paginate page={page} pages={pages} keyword={searchValue} />

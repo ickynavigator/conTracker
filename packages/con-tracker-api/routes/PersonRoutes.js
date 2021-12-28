@@ -2,24 +2,28 @@ import express from "express";
 import {
   createPerson,
   deletePerson,
+  getMissed,
+  getMissingById,
   getPersonById,
   getPersons,
   getTopPersons,
-  updatePerson,
+  updatePerson
 } from "../controllers/Person.controller.js";
 import { admin, protect } from "../middleware/authMiddleware.js";
 import {
   checkforIDinParams,
-  CriminalInfoVerification,
+  CriminalInfoVerification
 } from "../middleware/verificationMiddleware.js";
 
 const router = express.Router();
 
+router.route("/wanted").get(getTopPersons);
+router.route("/missing").get(getMissed);
+router.route("/missing/:id").get(getMissingById);
 router
   .route("/")
   .get(getPersons)
   .post(protect, admin, CriminalInfoVerification, createPerson);
-router.route("/wanted").get(getTopPersons);
 router
   .route("/:id")
   .get(checkforIDinParams, getPersonById)

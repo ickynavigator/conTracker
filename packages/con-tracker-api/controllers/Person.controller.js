@@ -189,3 +189,71 @@ export const getTopPersons = asyncHandler(async (req, res) => {
     return res.status(400).json({ err });
   }
 });
+
+/**
+ * @desc   Fetch all missing persons
+ * @route  GET /api/person/missing
+ * @access Public
+ */
+export const getMissed = asyncHandler(async (req, res) => {
+  const pageSize = Number(req.query.pageSize) || 10;
+  const page = Number(req.query.pageNumber) || 1;
+  const myFilter = req.query.filter;
+  const param = req.query.param || "";
+  const regOpt = "gim";
+  let keyword = [{}];
+
+  if (req.query.keyword) {
+    keyword = [
+      { nameFirst: { $regex: req.query.keyword, $options: regOpt } },
+      { nameLast: { $regex: req.query.keyword, $options: regOpt } },
+    ];
+
+    const specificQuery = {};
+    if (req.query.param) {
+      specificQuery[param] = { $regex: req.query.keyword, $options: regOpt };
+      keyword.push({ ...specificQuery });
+    }
+  }
+
+  let persons;
+  switch (myFilter) {
+    case "newest":
+      persons = await Person.find({ $or: [...keyword] })
+        .sort([["_id", -1]])
+        .limit(pageSize)
+        .skip(pageSize * (page - 1));
+      break;
+    case "oldest":
+      persons = await Person.find({ $or: [...keyword] })
+        .sort([["_id", 1]])
+        .limit(pageSize)
+        .skip(pageSize * (page - 1));
+      break;
+    default:
+      persons = await Person.find({ $or: [...keyword] })
+        .limit(pageSize)
+        .skip(pageSize * (page - 1));
+      break;
+  }
+
+  const count = await Person.countDocuments({ $or: [...keyword] });
+  res.json({ persons, page, pages: Math.ceil(count / pageSize) });
+});
+
+/**
+ * @desc   Fetch single missing person by id
+ * @route  GET /api/person/missing/:id
+ * @access Public
+ */
+export const getMissingById = asyncHandler(async (req, res) => {
+  try {
+    validationResult(req).throw();
+
+    const person = await Person.findById(req.params.id);
+
+    return res.status(200).json(person);
+  } catch (err) {
+    return res.status(404).json({ message: "Person Not Found", err });
+  }
+});

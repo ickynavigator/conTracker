@@ -1,47 +1,19 @@
-// import Link from "next/link";
 import Image from "next/image";
 import React from "react";
-import {
-  // Alert,
-  // Button,
-  // Card,
-  Col,
-  Container,
-  Row,
-} from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import { MetaHead } from "../../components/ui";
-import { getAllCriminalById } from "../../utils/api";
+import { getMissingPersonById } from "../../utils/api";
 
 const fallbackPic = "/assets/images/NoPicture.svg";
 
 export async function getServerSideProps(context) {
   const { id } = context.params;
 
-  const data = await getAllCriminalById(id);
+  const data = await getMissingPersonById(id);
 
   if (!data) return { notFound: true };
   return { props: { data } };
 }
-
-// const Person = props => {
-//   const { criminal } = props;
-//   const { _id: id, nameFirst, nameLast, nameOthers, image } = criminal;
-
-//   const name = `${nameFirst} ${
-//     nameOthers && `${nameOthers.split("")[0].toUpperCase()}.`
-//   } ${nameLast} `;
-//   return (
-//     <Card style={{ width: "15rem" }} className="shadow">
-//       <Card.Img variant="top" src={image || fallbackPic} />
-//       <Card.Body>
-//         <Card.Title>{name}</Card.Title>
-//         <Link passHref href={`/criminals/${id}`}>
-//           <Button variant="primary">View</Button>
-//         </Link>
-//       </Card.Body>
-//     </Card>
-//   );
-// };
 
 const index = props => {
   const unavailable = "UNAVAILABLE";
@@ -56,19 +28,19 @@ const index = props => {
     dob,
     race,
     picture,
-    residencePermitValidation: rpv,
     sex,
   } = data;
+
   const name = `${nameFirst} ${
     nameOthers && `${nameOthers.split("")[0].toUpperCase()}.`
   } ${nameLast} `;
 
   return (
     <>
-      <MetaHead title={name || "CRIMINAL"} />
+      <MetaHead title={name || "Missing"} />
 
       <div className="title-banner w-full">
-        <h1 className="text-center">CRIMINAL PAGE</h1>
+        <h1 className="text-center">MISSING</h1>
       </div>
 
       <Container className="my-3">
@@ -90,8 +62,6 @@ const index = props => {
             {race || unavailable}
             <h2>GENDER</h2>
             {sex || unavailable}
-            <h2>RESIDENCE PERMIT VALIDATION</h2>
-            {rpv.toString() || unavailable}
           </Col>
           <Col className="d-flex justify-content-center">
             <Image

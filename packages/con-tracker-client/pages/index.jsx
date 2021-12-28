@@ -47,7 +47,7 @@ const index = () => {
           <h2 className="text-center">Site Creators</h2>
           <Row xs={1} md={5}>
             {creators.map(({ name, picture }) => (
-              <Col className="my-3">
+              <Col className="my-3" key={name}>
                 <Card style={{ width: "15rem" }}>
                   <Card.Img alt={name} src={picture} variant="top" />
                   <Card.Body className="card-img-overlay d-flex justify-content-center">
