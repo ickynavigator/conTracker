@@ -29,4 +29,9 @@ export const submitContactForm = async data => {
   return (await res).data;
 };
 
+export const submitComplaint = async data => {
+  const res = axios.post(`${BASEURL}/report/complaint`, data);
+  return (await res).data;
+};
+
 export default {};
