@@ -23,7 +23,7 @@ const Header = () => {
   return (
     <Navbar bg="light" expand="lg">
       <Container fluid>
-        <Navbar.Brand href="#home">
+        <Navbar.Brand href="/">
           <Image
             src="/assets/images/logo.svg"
             width="300"

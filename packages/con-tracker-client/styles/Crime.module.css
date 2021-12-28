@@ -1,0 +1,9 @@
+.Container {
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .Container {
+    width: 50%;
+  }
+}

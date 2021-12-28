@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React, { useState } from "react";
-import { Col, Row, Form, Container, Button } from "react-bootstrap";
+import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { FiMail, FiPhone } from "react-icons/fi";
 import styles from "../../styles/components/Footer.module.css";
 import { submitContactForm } from "../../utils/api";
@@ -29,11 +29,10 @@ const Footer = () => {
   return (
     <>
       <div className={styles.contactWrapper}>
-        <Row xs={1} md={2}>
+        <Row xs={1} md={2} className="mx-4">
           <Col>
-            <h2>Contact Us</h2>
-
             <Container className="ms-2 my-3 ps-0 w-50">
+              <h2>Contact Us</h2>
               <Form noValidate validated={validated} onSubmit={handleSubmit}>
                 <Form.Group controlId="ContactUsName" className="my-2">
                   <Form.Control

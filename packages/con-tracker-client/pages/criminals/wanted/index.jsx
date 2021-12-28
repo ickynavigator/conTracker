@@ -2,7 +2,7 @@ import Link from "next/link";
 import React from "react";
 import { Button, Card, Col, Row } from "react-bootstrap";
 import { MetaHead, Paginate } from "../../../components/ui";
-import styles from "../../../styles/Wanted.module.css";
+// import styles from "../../../styles/Wanted.module.css";
 import { getWantedCriminals } from "../../../utils/api";
 
 const fallbackPic = "/assets/images/NoPicture.svg";
@@ -47,7 +47,7 @@ const index = props => {
     <>
       <MetaHead title="List of most wanted criminals" />
 
-      <div className={`${styles.WantedHeader} w-full`}>
+      <div className="title-banner w-full">
         <h1 className="text-center">MOST WANTED</h1>
       </div>
       <Row xs={2} md={4} className="m-auto">
