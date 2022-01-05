@@ -31,6 +31,7 @@ const index = () => {
   const [crimeZip, setCrimeZip] = useState("");
   const [crimeDesc, setCrimeDesc] = useState("");
   const [crimeType, setCrimeType] = useState("");
+  const [otherCrimeType, setOtherCrimeType] = useState("");
 
   const handleSubmit = async event => {
     const form = event.currentTarget;
@@ -56,6 +57,9 @@ const index = () => {
       crimeDesc,
       crimeType,
     };
+    if (crimeType === "Other") {
+      formDetails.otherCrimeType = otherCrimeType;
+    }
     const data = await submitCrime(formDetails);
     if (data.status === 200)
       setsuccessMsg("Your report has been submitted successfully");
@@ -235,6 +239,27 @@ const index = () => {
                 </Form.Check>
               </div>
             ))}
+            <div key="default-Other" className="mb-3">
+              <Form.Check id="crimeType-Other">
+                <Form.Check.Input
+                  required
+                  name="crimeType"
+                  type="radio"
+                  onChange={e => setCrimeType(e.target.id.split("-")[1])}
+                />
+                <Form.Check.Label>Other</Form.Check.Label>
+                <Form.Control
+                  required={crimeType === "Other"}
+                  disabled={crimeType !== "Other"}
+                  type="text"
+                  value={otherCrimeType}
+                  onChange={e => setOtherCrimeType(e.target.value)}
+                />
+                <Form.Control.Feedback type="invalid">
+                  Please select a crime type.
+                </Form.Control.Feedback>
+              </Form.Check>
+            </div>
           </Container>
 
           <Button type="submit">Submit</Button>
