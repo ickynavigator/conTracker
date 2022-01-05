@@ -33,11 +33,67 @@ const index = () => {
   const [crimeType, setCrimeType] = useState("");
   const [otherCrimeType, setOtherCrimeType] = useState("");
 
+  const [errors, setErrors] = useState({});
+
+  const errorValidate = () => {
+    const newErrors = {};
+
+    if (!contactAddress || contactAddress.length < 5)
+      newErrors.contactAddress =
+        "Address is required and should be at least 5 characters";
+
+    if (!contactName || contactName.length < 5)
+      newErrors.contactName =
+        "Name is required and should be at least 5 characters";
+
+    if (!contactEmail || contactEmail.length < 5)
+      newErrors.contactEmail =
+        "Email is required and should be at least 5 characters";
+
+    if (!contactPhone || contactPhone.length < 5)
+      newErrors.contactPhone = "Phone Number is required";
+    else if (!contactPhone.match(/^[0-9]{10}$/))
+      newErrors.contactPhone =
+        "Phone Number should be 10 digits (Numbers only)";
+
+    if (!crimeAddress || crimeAddress.length < 5)
+      newErrors.crimeAddress =
+        "Address is required and should be at least 5 characters";
+
+    if (crimeAddress2 && crimeAddress2.length < 5)
+      newErrors.crimeAddress2 =
+        "Address is required and should be at least 5 characters";
+
+    if (!crimeCity || crimeCity.length < 5)
+      newErrors.crimeCity =
+        "City is required and should be at least 5 characters";
+
+    if (!crimeZip) newErrors.crimeZip = "Zip is required";
+
+    if (!crimeDesc || crimeDesc.length < 5)
+      newErrors.crimeDesc =
+        "Description is required and should be at least 5 characters";
+
+    if (!crimeType) newErrors.crimeType = "Please select a crime type";
+
+    if (crimeType === "Other" && !otherCrimeType)
+      newErrors.otherCrimeType = "Please define a crime type";
+
+    return newErrors;
+  };
+
   const handleSubmit = async event => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    const newErrors = errorValidate();
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
       seterrorMsg("Please fill out all fields");
       return;
     }
@@ -95,9 +151,10 @@ const index = () => {
                 type="text"
                 value={contactAddress}
                 onChange={e => setContactAddress(e.target.value)}
+                isInvalid={!!errors.contactAddress}
               />
               <Form.Control.Feedback type="invalid">
-                Please provide a valid address.
+                {errors.contactAddress}
               </Form.Control.Feedback>
             </Form.Group>
 
@@ -108,9 +165,10 @@ const index = () => {
                 type="text"
                 value={contactName}
                 onChange={e => setContactName(e.target.value)}
+                isInvalid={!!errors.contactName}
               />
               <Form.Control.Feedback type="invalid">
-                Please provide a valid name.
+                {errors.contactName}
               </Form.Control.Feedback>
             </Form.Group>
 
@@ -121,9 +179,10 @@ const index = () => {
                 type="email"
                 value={contactEmail}
                 onChange={e => setContactEmail(e.target.value)}
+                isInvalid={!!errors.contactEmail}
               />
               <Form.Control.Feedback type="invalid">
-                Please provide a valid email.
+                {errors.contactEmail}
               </Form.Control.Feedback>
             </Form.Group>
 
@@ -134,9 +193,10 @@ const index = () => {
                 type="tel"
                 value={contactPhone}
                 onChange={e => setContactPhone(e.target.value)}
+                isInvalid={!!errors.contactPhone}
               />
               <Form.Control.Feedback type="invalid">
-                Please provide a valid phone number.
+                {errors.contactPhone}
               </Form.Control.Feedback>
             </Form.Group>
           </Container>
@@ -155,9 +215,10 @@ const index = () => {
                 type="text"
                 value={crimeAddress}
                 onChange={e => setCrimeAddress(e.target.value)}
+                isInvalid={!!errors.crimeAddress}
               />
               <Form.Control.Feedback type="invalid">
-                Please provide a valid Address.
+                {errors.crimeAddress}
               </Form.Control.Feedback>
             </Form.Group>
 
@@ -167,9 +228,10 @@ const index = () => {
                 type="text"
                 value={crimeAddress2}
                 onChange={e => setCrimeAddress2(e.target.value)}
+                isInvalid={!!errors.crimeAddress2}
               />
               <Form.Control.Feedback type="invalid">
-                Please provide a valid Address.
+                {errors.crimeAddress2}
               </Form.Control.Feedback>
             </Form.Group>
 
@@ -182,9 +244,10 @@ const index = () => {
                 type="text"
                 value={crimeCity}
                 onChange={e => setCrimeCity(e.target.value)}
+                isInvalid={!!errors.crimeCity}
               />
               <Form.Control.Feedback type="invalid">
-                Please provide a valid City.
+                {errors.crimeCity}
               </Form.Control.Feedback>
             </Form.Group>
 
@@ -197,9 +260,10 @@ const index = () => {
                 type="text"
                 value={crimeZip}
                 onChange={e => setCrimeZip(e.target.value)}
+                isInvalid={!!errors.crimeZip}
               />
               <Form.Control.Feedback type="invalid">
-                Please provide a valid Zip Code.
+                {errors.crimeZip}
               </Form.Control.Feedback>
             </Form.Group>
 
@@ -212,9 +276,10 @@ const index = () => {
                 as="textarea"
                 value={crimeDesc}
                 onChange={e => setCrimeDesc(e.target.value)}
+                isInvalid={!!errors.crimeDesc}
               />
               <Form.Control.Feedback type="invalid">
-                Please provide a valid Description.
+                {errors.crimeDesc}
               </Form.Control.Feedback>
             </Form.Group>
           </Container>
@@ -231,11 +296,9 @@ const index = () => {
                     name="crimeType"
                     type="radio"
                     onChange={e => setCrimeType(e.target.id.split("-")[1])}
+                    isInvalid={!!errors.crimeType}
                   />
                   <Form.Check.Label>{`${type}`}</Form.Check.Label>
-                  <Form.Control.Feedback type="invalid">
-                    Please select a crime type.
-                  </Form.Control.Feedback>
                 </Form.Check>
               </div>
             ))}
@@ -246,18 +309,31 @@ const index = () => {
                   name="crimeType"
                   type="radio"
                   onChange={e => setCrimeType(e.target.id.split("-")[1])}
+                  isInvalid={!!errors.crimeType}
                 />
                 <Form.Check.Label>Other</Form.Check.Label>
-                <Form.Control
-                  required={crimeType === "Other"}
-                  disabled={crimeType !== "Other"}
-                  type="text"
-                  value={otherCrimeType}
-                  onChange={e => setOtherCrimeType(e.target.value)}
-                />
-                <Form.Control.Feedback type="invalid">
-                  Please select a crime type.
-                </Form.Control.Feedback>
+
+                {crimeType === "Other" && (
+                  <>
+                    <Form.Control
+                      required={crimeType === "Other"}
+                      disabled={crimeType !== "Other"}
+                      type="text"
+                      value={otherCrimeType}
+                      onChange={e => setOtherCrimeType(e.target.value)}
+                      isInvalid={!!errors.otherCrimeType}
+                    />
+                    <Form.Control.Feedback type="invalid">
+                      {errors.otherCrimeType}
+                    </Form.Control.Feedback>
+                  </>
+                )}
+
+                {!crimeType && (
+                  <Form.Control.Feedback type="invalid">
+                    {errors.crimeType}
+                  </Form.Control.Feedback>
+                )}
               </Form.Check>
             </div>
           </Container>
