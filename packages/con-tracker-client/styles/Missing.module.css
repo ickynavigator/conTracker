@@ -1,0 +1,47 @@
+.pictureWrapper {
+  cursor: pointer;
+  border: 0.5rem dotted gray;
+  border-radius: 0.5rem;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+.pictureWrapper > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.previewWrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  background-color: #fff;
+}
+
+.fileChoice {
+  border: 2 solid red;
+  color: red;
+  border-radius: 0.5rem;
+  padding: 0.8rem;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  font-weight: 500;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+.formatText {
+  color: gray;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  text-align: center;
+  margin-inline: 2rem;
+}
