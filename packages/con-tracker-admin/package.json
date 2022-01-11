@@ -1,20 +1,13 @@
 {
   "name": "con-tracker-admin",
   "private": true,
+  "type": "module",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
+    "dev": "node dev.js",
     "test": "echo \"Error: no test specified\" && exit 0"
   },
-  "dependencies": {
-    "next": "12.0.7",
-    "react": "17.0.2",
-    "react-dom": "17.0.2"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "eslint": "8.6.0",
-    "eslint-config-next": "12.0.7"
+    "php-server": "^1.0.0"
   }
 }

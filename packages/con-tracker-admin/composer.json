@@ -1,0 +1,13 @@
+{
+  "name": "contracker/admin",
+  "authors": [
+    {
+      "name": "Obi Fortune",
+      "email": "gabrielobi.of@gmail.com",
+      "homepage": "https://obifortune.tech"
+    }
+  ],
+  "require": {
+    "php": "^7.0.0"
+  }
+}
