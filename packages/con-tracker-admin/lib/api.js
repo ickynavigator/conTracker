@@ -1,12 +1,9 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
-export const ApiUrl = "https://contracker316.herokuapp.com";
-export const BASEURL = `${ApiUrl}/v1/api`;
+const ApiUrl = "https://contracker316.herokuapp.com";
+const BASEURL = `${ApiUrl}/v1/api`;
 
-export const getAllCriminals = async (
-  pageNum = 1,
-  pageSize = 10,
-  search = "",
-) => {
+const getAllCriminals = async (pageNum = 1, pageSize = 10, search = "") => {
   const query = search ? `keyword=${search}` : "";
   const page = pageNum ? `pageNumber=${pageNum}` : "";
   const size = pageSize ? `pageSize=${pageSize}` : "";

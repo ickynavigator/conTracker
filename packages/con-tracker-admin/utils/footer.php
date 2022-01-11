@@ -16,5 +16,3 @@
 <!-- My scripts  -->
 <script src="./lib/index.js"></script>
 <script src="./lib/api.js"></script>
-
-<?php $conn->close() ?>

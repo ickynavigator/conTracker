@@ -1,24 +1,16 @@
 <?php
-include("./utils/config.php");
+require_once("./utils/config.php");
 
-?>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <?php
-    $title = "Home";
-    $pageName = "home";
-    include("./utils/headtag.php");
-    ?>
-</head>
-
-<body>
-    <?php include("./utils/navbar.php"); ?>
-
-    <?php
-    include("./utils/footer.php");
-    ?>
-</body>
-
-</html>
+switch (basename($_SERVER['REQUEST_URI'], '.php')) {
+    case 'contact':
+        include('pages/contact.php');
+        break;
+    default:
+        if (basename($_SERVER['REQUEST_URI'], '.php') == '' || basename($_SERVER['REQUEST_URI'], '.php') == 'index') {
+            include('./pages/home.php');
+        } else {
+            header('HTTP/1.0 404 Not Found');
+            include('./pages/404.php');
+        }
+        break;
+}
