@@ -18,4 +18,4 @@
 
 <!-- my styles -->
 <link rel="stylesheet" href="./styles/css/globals.css">
-<link rel="stylesheet" href="./styles/css/<?php echo $pageName; ?>.module.css">
+<link rel="stylesheet" href="./styles/css/<?php echo $pageName; ?>.amodule.css">
