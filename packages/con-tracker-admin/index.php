@@ -1,10 +1,13 @@
 <?php
 require_once("./utils/config.php");
-
 switch (basename($_SERVER['REQUEST_URI'], '.php')) {
-    case 'contact':
-        include('pages/contact.php');
-        break;
+        case 'allCriminals':
+            include('pages/allCriminals.php');
+            break;
+        case 'view':
+                include('pages/view.php');
+                break;
+           
     default:
         if (basename($_SERVER['REQUEST_URI'], '.php') == '' || basename($_SERVER['REQUEST_URI'], '.php') == 'index') {
             include('./pages/home.php');
