@@ -1,8 +1,6 @@
 import asyncHandler from "express-async-handler";
 import { validationResult } from "express-validator";
-
-import Form from "../models/FormModel.js";
-import { FORM_TYPE } from "../constants.js";
+import { ComplaintForm, CrimeForm, MissingForm } from "../models/FormModel.js";
 
 /**
  * @desc   submit missing person
@@ -11,14 +9,32 @@ import { FORM_TYPE } from "../constants.js";
  */
 export const submitMissingPerson = asyncHandler(async (req, res) => {
   try {
-    const { title, description, picture } = req.body;
+    const {
+      name,
+      dob,
+      location,
+      height,
+      weight,
+      eyeColor,
+      hairColor,
+      race,
+      gender,
+      picture,
+    } = req.body;
     validationResult(req).throw();
 
-    const form = new Form({
-      type: FORM_TYPE.MISSING,
-      title: title?.trim(),
-      description: description?.trim(),
+    const form = new MissingForm({
+      name: name.trim(),
+      dob: dob ? new Date(dob).toUTCString() : "",
+      location: location.trim(),
+      height,
+      weight,
+      eyeColor: eyeColor.trim(),
+      hairColor: hairColor.trim(),
+      race: race.trim(),
+      gender: gender || "UNSPECIFIED",
       picture,
+      resolved: false,
     });
 
     const missingPerson = await form.save();
@@ -35,13 +51,14 @@ export const submitMissingPerson = asyncHandler(async (req, res) => {
  */
 export const submitComplaint = asyncHandler(async (req, res) => {
   try {
-    const { title, description } = req.body;
+    const { title, phone, description } = req.body;
     validationResult(req).throw();
 
-    const form = new Form({
-      type: FORM_TYPE.COMPLAINT,
+    const form = new ComplaintForm({
       title: title.trim(),
       description: description.trim(),
+      phone: phone.trim(),
+      resolved: false,
     });
 
     const complaint = await form.save();
@@ -58,15 +75,34 @@ export const submitComplaint = asyncHandler(async (req, res) => {
  */
 export const submitCrime = asyncHandler(async (req, res) => {
   try {
-    const { title, description, criminals } = req.body;
+    const {
+      contactAddress,
+      contactName,
+      contactEmail,
+      contactPhone,
+      crimeAddress,
+      crimeAddress2,
+      crimeCity,
+      crimeZip,
+      crimeDesc,
+      crimeType,
+      otherCrimeType,
+    } = req.body;
     validationResult(req).throw();
 
-    const form = new Form({
-      type: FORM_TYPE.CRIME,
-      title: title.trim(),
-      description: description.trim(),
-      relatedCriminals: criminals,
-      byAdmin: false,
+    const CrimeType = crimeType === "Other" ? otherCrimeType : crimeType;
+    const form = new CrimeForm({
+      contactAddress: contactAddress.trim(),
+      contactName: contactName.trim(),
+      contactEmail: contactEmail.trim(),
+      contactPhone: contactPhone.trim(),
+
+      crimeAddress: crimeAddress.trim(),
+      crimeAddress2: crimeAddress2.trim(),
+      crimeCity: crimeCity.trim(),
+      crimeZip: crimeZip.trim(),
+      crimeDesc: crimeDesc.trim(),
+      crimeType: CrimeType.trim(),
     });
 
     const complaint = await form.save();
