@@ -32,7 +32,9 @@ function navPrint($currPage, $navArr)
                 navPrint(
                     $pageName,
                     [
-                        ["home", "Home",  "./index"]
+                        ["home", "Home",  "./index"],
+                        ["allCriminal", "All Criminals",  "./allCriminals.php"],
+                        ["allMissing", "All Missing",  "./allMissing.php"],
                     ]
                 );
                 ?>

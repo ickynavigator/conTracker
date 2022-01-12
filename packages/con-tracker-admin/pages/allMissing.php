@@ -10,6 +10,7 @@
     table,
     th,
     td {
+      border: 1px solid black;
       border-collapse: collapse;
     }
 
@@ -27,22 +28,21 @@
     }
 
     button {
-      background-color: #008cba;
+      background-color: #008CBA;
       border: none;
       color: white;
       padding: 8px 25px;
       text-align: center;
       text-decoration: none;
-      display: inline-block;
       font-size: 16px;
       margin: 2rem 0;
     }
 
     div,
-    h2,
-    h1 {
+    h2 {
       width: 100%;
       text-align: center;
+      padding-bottom: 20px;
     }
 
     input {
@@ -51,30 +51,29 @@
     }
 
     a {
-      color: #008cba;
+      color: #008CBA;
       text-decoration: none;
     }
   </style>
   <?php
-  $title = "All Criminals";
-  $pageName = "allCriminals";
+  $title = "Missing People";
+  $pageName = "allMissing";
   include("./utils/headtag.php");
   ?>
+  <link rel="stylesheet" href="global.css">
 </head>
 
 <body>
   <?php include("./utils/navbar.php"); ?>
-
-  <h1>All Criminals</h1>
+  <h1>Missing People</h1>
   <div>
-    <form method="GET" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+    <form method="get" action="<?php echo $_SERVER['PHP_SELF']; ?>">
       <input type="text" name="search-name" placeholder="Search by name... ">
       <button type="submit" value="search" name="submit">Search</button>
     </form>
   </div>
 
   <?php
-
   $query = (isset($_GET['search'])) ? 'keyword=' . $_GET['search'] : "";
   $page = (isset($_GET['pageNum'])) ? 'pageNumber=' . $_GET['pageNum'] : "";
 
@@ -84,7 +83,7 @@
     $pageno = 1;
   }
 
-  $api_url = 'https://contracker316.herokuapp.com/v1/api/person' . $page . $query;
+  $api_url = 'https://contracker316.herokuapp.com/v1/api/person/missing' . $page . $query;
   $json_data = file_get_contents($api_url);
   $response_data = json_decode($json_data);
   $user_data = $response_data->persons;

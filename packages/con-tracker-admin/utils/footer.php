@@ -14,5 +14,5 @@
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
 <!-- My scripts  -->
-<script src="./lib/index.js"></script>
-<script src="./lib/api.js"></script>
+<!-- <script src="./lib/index.js"></script> -->
+<!-- <script src="./lib/api.js"></script> -->
