@@ -12,6 +12,9 @@ module.exports = {
     },
     ecmaVersion: 12,
     requireConfigFile: false,
+    babelOptions: {
+      presets: ["@babel/preset-react"],
+    },
   },
   plugins: ["react", "prettier"],
   rules: {
@@ -37,8 +40,11 @@ module.exports = {
   },
   overrides: [
     {
-      files: ["./packages/con-tracker-client"],
+      files: ["./packages/con-tracker-client", "./packages/con-tracker-admin"],
       extends: ["next/core-web-vitals"],
+      settings: {
+        react: { version: "detect" },
+      },
     },
     {
       files: ["./packages/con-tracker-api/**/*.js"],
